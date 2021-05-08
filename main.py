@@ -9,15 +9,28 @@ from keep_running import keep_running
 client = discord.Client()
 my_secret = os.environ['TOKEN']
 
-sad_words = ["sad", "depressed", "angry", "pissed", "cheesed", "depressing", "wtf", "tf"]
+sad_words = ["sad", "depressed", "angry", "pissed", "cheesed", "depressing", "how"]
+game_choose = ["Please pick a game"]
 
 starter_encouragements = [
   "Cheer up", 
   "You're doing great",
-  "estargel",
-  "ma3lesh hbb",
-  "7aram"
+  "Don't give up",
+  "We got it",
+  "We'll get em next time"
 ]
+
+games_list = [
+  "Call of Duty: Warzone", 
+  "Call of Duty: Cold War",
+  "Call of Duty: Modern Warfare",
+  "Fortnite",
+  "NBA",
+  "FIFA",
+  "Fortnite",
+  "GTA V"
+]
+
 
 if "responding" not in db.keys():
   db["responding"] = True
@@ -54,7 +67,7 @@ async def on_message(message):
   msg = message.content
 
 
-  if msg.startswith('edeeny wa7da'):
+  if msg.startswith('inspire'):
       quote = get_quote()
       await message.channel.send(quote)
 
@@ -62,9 +75,16 @@ async def on_message(message):
     options = starter_encouragements
     if "encouragements" in db.keys():
       options = options + db["encouragements"]
+      
+   if db["responding"]:
+    options2 = game_choose
+
 
     if any(word in msg for word in sad_words):
       await message.channel.send(random.choice(options))
+
+    if any(word in msg for word in game_choose):
+      await message.channel.send(random.choice(options2))
 
   if msg.startswith("$new"):
     encouraging_message = msg.split("$new ", 1)[1]
