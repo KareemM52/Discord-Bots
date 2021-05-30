@@ -9,7 +9,7 @@ from keep_running import keep_running
 client = discord.Client()
 my_secret = os.environ['TOKEN']
 
-sad_words = ["sad", "depressed", "angry", "pissed", "cheesed", "depressing", "how"]
+sad_words = ["sad", "depressed", "angry", "pissed", "cheesed", "depressing", "how?"]
 game_choose = ["Please pick a game"]
 
 starter_encouragements = [
@@ -25,8 +25,8 @@ games_list = [
   "Call of Duty: Cold War",
   "Call of Duty: Modern Warfare",
   "Fortnite",
-  "NBA",
-  "FIFA",
+  "NBA 2K21",
+  "FIFA 21",
   "Fortnite",
   "GTA V"
 ]
@@ -74,17 +74,15 @@ async def on_message(message):
   if db["responding"]:
     options = starter_encouragements
     if "encouragements" in db.keys():
-      options = options + db["encouragements"]
-      
-   if db["responding"]:
-    options2 = game_choose
+      options.extend(db["encouragements"])
+     
 
 
     if any(word in msg for word in sad_words):
       await message.channel.send(random.choice(options))
 
     if any(word in msg for word in game_choose):
-      await message.channel.send(random.choice(options2))
+      await message.channel.send(random.choice(games_list))
 
   if msg.startswith("$new"):
     encouraging_message = msg.split("$new ", 1)[1]
