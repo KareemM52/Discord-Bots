@@ -22,7 +22,7 @@ starter_encouragements = [
 
 games_list = [
   "Call of Duty: Warzone", 
-  "Call of Duty: Cold War",
+  "Call of Duty: Black Ops Cold War",
   "Call of Duty: Modern Warfare",
   "Fortnite",
   "NBA 2K21",
